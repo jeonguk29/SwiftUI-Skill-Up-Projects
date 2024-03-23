@@ -6,31 +6,35 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @StateObject private var pathModel = PathModel()
+    @StateObject private var pathModel = PathModel()// 네비게이션 스택을 관리하기 위한 PathModel의 인스턴스를 생성합니다.
     @StateObject private var onboardingViewModel = OnboardingViewModel()
+    
+    @StateObject private var todoListViewModel = TodoListViewModel()
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
-          OnboardingContentView(onboardingViewModel: onboardingViewModel)
-            .navigationDestination(
-              for: PathType.self, // 목적지로 갈 수 있는 애들 정하기
-              destination: { pathType in
-                switch pathType {
-                case .homeView:
-                  HomeView()
-                    .navigationBarBackButtonHidden() // 기본 네비게이션 바 숨기기 커스텀으로 만들것임
-  
-                case .todoView:
-                  TodoView()
-                    .navigationBarBackButtonHidden()
-                 
-                case .memoView:
-                  MemoView()
-                    .navigationBarBackButtonHidden()
-
-                }
-              }
-            )
+            // OnboardingContentView(onboardingViewModel: onboardingViewModel)
+            TodoListView()
+                .environmentObject(todoListViewModel)
+                .navigationDestination(
+                    for: PathType.self, // 목적지로 갈 수 있는 애들 정하기
+                    destination: { pathType in
+                        switch pathType {
+                        case .homeView:
+                            HomeView()
+                                .navigationBarBackButtonHidden() // 기본 네비게이션 바 숨기기 커스텀으로 만들것임
+                            
+                        case .todoView:
+                            TodoView()
+                                .navigationBarBackButtonHidden()
+                                .environmentObject(todoListViewModel)
+                        case .memoView:
+                            MemoView()
+                                .navigationBarBackButtonHidden()
+                            
+                        }
+                    }
+                )
         }
         .environmentObject(pathModel)
     }
