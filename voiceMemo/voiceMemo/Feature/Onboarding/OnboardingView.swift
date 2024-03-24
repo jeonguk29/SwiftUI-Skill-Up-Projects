@@ -10,11 +10,12 @@ struct OnboardingView: View {
     @StateObject private var onboardingViewModel = OnboardingViewModel()
     
     @StateObject private var todoListViewModel = TodoListViewModel()
+    @StateObject private var memoListViewModel = MemoListViewModel()
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
             // OnboardingContentView(onboardingViewModel: onboardingViewModel)
-            TodoListView()
+            MemoListView()
                 .environmentObject(todoListViewModel)
                 .navigationDestination(
                     for: PathType.self, // 목적지로 갈 수 있는 애들 정하기
@@ -28,10 +29,16 @@ struct OnboardingView: View {
                             TodoView()
                                 .navigationBarBackButtonHidden()
                                 .environmentObject(todoListViewModel)
-                        case .memoView:
-                            MemoView()
-                                .navigationBarBackButtonHidden()
-                            
+                        case let .memoView(isCreateMode, memo):
+                            MemoView(
+                                memoViewModel: isCreateMode
+                                ? .init(memo: .init(title: "", content: "", date: .now))
+                                : .init(memo: memo ?? .init(title: "", content: "", date: .now)),
+                                // 생성모드일때는 빈값으로 초기화 수정 모드일때는 메모를 전달하고 없을 수도 있으니 초기화 
+                                isCreateMode: isCreateMode
+                            )
+                            .navigationBarBackButtonHidden()
+                            .environmentObject(memoListViewModel)
                         }
                     }
                 )
