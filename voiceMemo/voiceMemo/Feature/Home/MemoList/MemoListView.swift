@@ -42,7 +42,7 @@ struct MemoListView: View {
                 .padding(.trailing, 20)
                 .padding(.bottom, 50)
         }
-        .alert(
+        .alert( 
             "메모 \(memoListViewModel.removeMemoCount)개 삭제하시겠습니까?",
             isPresented: $memoListViewModel.isDisplayRemoveMemoAlert
         ) {

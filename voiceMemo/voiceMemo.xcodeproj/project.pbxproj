@@ -85,6 +85,7 @@
 		12F0E9512A8C89A000773BAD /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		12F3EA0E2AA70ACF00944994 /* Color+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extensions.swift"; sourceTree = "<group>"; };
 		12FE29262A9C67F000142894 /* WriteBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBtn.swift; sourceTree = "<group>"; };
+		640F71922BB2D20B001F264D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +118,7 @@
 		128AB1992A7A49EA00775225 /* voiceMemo */ = {
 			isa = PBXGroup;
 			children = (
+				640F71922BB2D20B001F264D /* Info.plist */,
 				128AB1A82A7A4A0800775225 /* App */,
 				128AB1AE2A7A4A8900775225 /* Core */,
 				12E7D5442A8B50EB00A77193 /* Component */,
@@ -594,6 +596,8 @@
 				DEVELOPMENT_TEAM = 9S8KMMC3YH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = voiceMemo/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"마이크를 사용하여 녹음하려고 합니다.\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -628,6 +632,8 @@
 				DEVELOPMENT_TEAM = 9S8KMMC3YH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = voiceMemo/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"마이크를 사용하여 녹음하려고 합니다.\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

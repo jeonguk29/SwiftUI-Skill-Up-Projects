@@ -37,10 +37,11 @@ extension Date {
         }
     }
     
-//    var fomattedVoiceRecorderTime: String {
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "ko_KR")
-//        formatter.dateFormat = "yyyy.M.d"
-//        return formatter.string(from: self)
-//    }
+    // 음성 메모에서 사용할 속성
+    var fomattedVoiceRecorderTime: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy.M.d"
+        return formatter.string(from: self)
+    }
 }
