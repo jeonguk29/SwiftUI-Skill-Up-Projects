@@ -177,6 +177,22 @@ extension VoiceRecorderViewModel {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    
+    /*
+     이 코드는 앱의 문서 디렉토리에 대한 URL을 가져오는 메서드를 정의합니다. 이 메서드는 주로 파일을 저장하고 앱에서 생성한 데이터를 관리하는 데 사용됩니다. 이 메서드를 단계별로 설명하겠습니다.
+
+     getDocumentsDirectory() 메서드:
+     FileManager.default.urls(for:in:): FileManager 클래스의 default 속성을 사용하여 기본 파일 관리자를 가져옵니다. 그런 다음 urls(for:in:) 메서드를 사용하여 특정 디렉토리에 대한 URL 목록을 가져옵니다.
+
+     첫 번째 매개변수인 .documentDirectory는 특정 디렉토리를 지정하는데 사용됩니다. 여기서는 앱의 문서 디렉토리를 나타냅니다.
+     두 번째 매개변수 .userDomainMask는 검색할 디렉토리를 나타냅니다. 여기서는 사용자의 홈 디렉토리를 검색하도록 지정됩니다.
+     반환된 URL 배열의 첫 번째 요소를 반환합니다.
+
+     paths[0]은 반환된 URL 배열의 첫 번째 요소를 의미합니다. 앱의 문서 디렉토리는 항상 첫 번째로 반환되므로 첫 번째 요소를 반환합니다.
+     따라서 이 메서드는 앱의 문서 디렉토리에 대한 URL을 반환합니다. 이 URL을 사용하여 파일을 저장하고 검색할 수 있습니다.
+
+     이 메서드를 사용하면 파일 시스템에서 앱의 문서 디렉토리에 쉽게 액세스할 수 있으므로, 파일을 저장하거나 로드하는 데 사용될 수 있습니다.
+     */
 }
 
 // MARK: - 음성메모 재생 관련
