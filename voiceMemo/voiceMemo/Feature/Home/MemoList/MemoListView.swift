@@ -8,6 +8,8 @@ import SwiftUI
 struct MemoListView: View {
     @EnvironmentObject private var pathModel: PathModel
     @EnvironmentObject private var memoListViewModel: MemoListViewModel
+    @EnvironmentObject private var homeViewModel: HomeViewModel
+    
     // 전역적으로 상태 공유하고 사용하기 위해 @EnvironmentObject를 사용
     
     var body: some View {
@@ -51,7 +53,12 @@ struct MemoListView: View {
             }
             Button("취소", role: .cancel) { }
         }
-        
+        .onChange(
+          of: memoListViewModel.memos,
+          perform: { memos in
+            homeViewModel.setMemosCount(memos.count)
+          }
+        )
     }
 }
 

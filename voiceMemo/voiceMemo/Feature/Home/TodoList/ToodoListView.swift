@@ -9,6 +9,10 @@ struct TodoListView: View {
     
     @EnvironmentObject private var pathModel: PathModel
     @EnvironmentObject private var todoListViewModel: TodoListViewModel // TodoView와 전역적으로 상태를 공유하기 위함
+    
+    @EnvironmentObject private var homeViewModel: HomeViewModel
+    
+    
     var body: some View {
         ZStack {
             // 투두 셀 리스트
@@ -51,7 +55,14 @@ struct TodoListView: View {
             }
             Button("취소", role: .cancel) { }
         }
-        
+        .onChange(
+            // of 안에 값이 변하면 perform으로 동작실행 가능
+            of: todoListViewModel.todos,
+            perform: { todos in
+                homeViewModel.setTodosCount(todos.count)
+            }
+        )
+        // 이렇게 하면 실시간으로 todo 변경될때 마다 셋팅에서 바인딩 시킨 todo개수 알 수 있음 
     }
     
     

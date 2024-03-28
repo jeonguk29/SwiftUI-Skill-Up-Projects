@@ -14,9 +14,7 @@ struct OnboardingView: View {
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
-            // OnboardingContentView(onboardingViewModel: onboardingViewModel)
-            TimerView()
-                .environmentObject(memoListViewModel)
+             OnboardingContentView(onboardingViewModel: onboardingViewModel)
                 .navigationDestination(
                     for: PathType.self, // 목적지로 갈 수 있는 애들 정하기
                     destination: { pathType in
@@ -24,6 +22,8 @@ struct OnboardingView: View {
                         case .homeView:
                             HomeView()
                                 .navigationBarBackButtonHidden() // 기본 네비게이션 바 숨기기 커스텀으로 만들것임
+                                .environmentObject(todoListViewModel)
+                                .environmentObject(memoListViewModel)
                             
                         case .todoView:
                             TodoView()

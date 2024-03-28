@@ -86,7 +86,7 @@ private extension TimerViewModel {
                 self.notificationService.sendNotification()
                 
                 // 앱이 포그라운드 상태에서 알람 날아옴 하지만 백그라운드에서는 날아오지 못함 타이머가 안돌아서 
-                // 아래 코드 때문에 백그라운드에서도 보낼 수 있음 
+                // 아래 코드 때문에 백그라운드에서도 보낼 수 있음
                 if let task = backgroundTaskID {
                   UIApplication.shared.endBackgroundTask(task)
                   backgroundTaskID = .invalid
