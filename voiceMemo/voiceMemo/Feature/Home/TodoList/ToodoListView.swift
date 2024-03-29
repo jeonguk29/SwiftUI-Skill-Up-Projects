@@ -14,7 +14,8 @@ struct TodoListView: View {
     
     
     var body: some View {
-        ZStack {
+        // 3번째 방법 이것도 디자인 시스템으로 많이 활용됨
+        WriteBtnView {
             // 투두 셀 리스트
             VStack {
                 if !todoListViewModel.todos.isEmpty {
@@ -41,11 +42,16 @@ struct TodoListView: View {
                         .padding(.top, 20)
                 }
             }
-            
-            WriteTodoBtnView()
-                .padding(.trailing, 20)
-                .padding(.bottom, 50)
+        } action: {
+            pathModel.paths.append(.todoView)
         }
+
+        
+        //.modifier(WriteBtnViewModifier(action: {pathModel.paths.append(.todoView)}))
+        // 기존 작성 버튼의 액션을 넘겨줌
+//        .writeBtn {
+//            pathModel.paths.append(.todoView) // 두번째 방법 더 단순해짐 (이걸 선호함)
+//        }
         .alert(
             "To do list \(todoListViewModel.removeTodosCount)개 삭제하시겠습니까?",
             isPresented: $todoListViewModel.isDisplayRemoveTodoAlert
@@ -62,7 +68,7 @@ struct TodoListView: View {
                 homeViewModel.setTodosCount(todos.count)
             }
         )
-        // 이렇게 하면 실시간으로 todo 변경될때 마다 셋팅에서 바인딩 시킨 todo개수 알 수 있음 
+        // 이렇게 하면 실시간으로 todo 변경될때 마다 셋팅에서 바인딩 시킨 todo개수 알 수 있음
     }
     
     
