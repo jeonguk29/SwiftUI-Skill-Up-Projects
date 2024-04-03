@@ -14,9 +14,9 @@ struct TodoView: View {
     VStack {
       CustomNavigationBar(
         leftBtnAction: {
-          pathModel.paths.removeLast()
+          pathModel.paths.removeLast() // 뒤로가기
         },
-        rightBtnAction: {
+        rightBtnAction: { // 생성하기 버튼 구현
           todoListViewModel.addTodo(
             .init(
               title: todoViewModel.title,

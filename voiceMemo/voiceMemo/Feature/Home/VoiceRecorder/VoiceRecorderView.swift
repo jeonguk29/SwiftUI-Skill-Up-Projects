@@ -297,14 +297,14 @@ private struct ProgressBar: View {
 // MARK: - 녹음 버튼 뷰
 private struct RecordBtnView: View {
     @ObservedObject private var voiceRecorderViewModel: VoiceRecorderViewModel
-    @State private var isAnimation: Bool
+    @State private var isAnimation: Bool // 애니메이션 부분
     
     fileprivate init(
         voiceRecorderViewModel: VoiceRecorderViewModel,
-        isAnimation: Bool = false
+        isAnimation: Bool = false // 애니메이션 부분
     ) {
         self.voiceRecorderViewModel = voiceRecorderViewModel
-        self.isAnimation = isAnimation
+        self.isAnimation = isAnimation // 애니메이션 부분
     }
     
     fileprivate var body: some View {
@@ -319,12 +319,20 @@ private struct RecordBtnView: View {
                         voiceRecorderViewModel.recordBtnTapped()
                     },
                     label: {
-                        if voiceRecorderViewModel.isRecording {
-                            Image("mic_recording") // 녹음 중이라면
-                               
-                        } else {
-                            Image("mic") // 녹음 중이 아니라면
-                        }
+                      if voiceRecorderViewModel.isRecording {
+                        Image("mic_recording")
+                          .scaleEffect(isAnimation ? 1.5 : 1) // 커질것임
+                          .onAppear { // 이미지가 나타날때
+                            withAnimation(.spring().repeatForever()) {
+                              isAnimation.toggle() // 즉 계속 스케일이 커졌다 줄었다 할거임
+                            }// 녹음중일때는 계속 애니메이션으로 알려주기
+                          }
+                          .onDisappear { // 해당 이미지가 사라졌을때 애니메이션 꺼주기 아래        Image("mic")가 보일때도 내부적으로 애니메이션 돌아서 이상하게 보임
+                            isAnimation = false
+                          }
+                      } else {
+                        Image("mic")
+                      }
                     }
                 )
             }
