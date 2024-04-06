@@ -13,11 +13,13 @@
 		64351D342BBD5FA90072FAEB /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64351D332BBD5FA90072FAEB /* AuthenticationViewModel.swift */; };
 		64351D3A2BBD6AB40072FAEB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 64351D392BBD6AB40072FAEB /* FirebaseAuth */; };
 		64351D3C2BBD6B660072FAEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64351D3B2BBD6B660072FAEB /* AppDelegate.swift */; };
+		6440FD582BC10E9400C256EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6440FD572BC10E9400C256EC /* GoogleService-Info.plist */; };
+		6440FD5C2BC1137000C256EC /* randomNonceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440FD5B2BC1137000C256EC /* randomNonceString.swift */; };
+		6440FD5E2BC1138C00C256EC /* sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440FD5D2BC1138C00C256EC /* sha256.swift */; };
 		647D4F272BBFB98B0004B691 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 647D4F262BBFB98B0004B691 /* GoogleSignIn */; };
 		647D4F292BBFB98B0004B691 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 647D4F282BBFB98B0004B691 /* GoogleSignInSwift */; };
 		647D4F2D2BBFBBAE0004B691 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647D4F2C2BBFBBAE0004B691 /* User.swift */; };
 		647D4F2F2BBFBBF20004B691 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647D4F2E2BBFBBF20004B691 /* ServiceError.swift */; };
-		64ACEE302BBD6D3100099400 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64ACEE2F2BBD6D3100099400 /* GoogleService-Info.plist */; };
 		64ACEE322BBEE76700099400 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ACEE312BBEE76700099400 /* AuthenticationService.swift */; };
 		64ACEE362BBEEA8F00099400 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ACEE352BBEEA8F00099400 /* LoginIntroView.swift */; };
 		64ACEE382BBEEAA900099400 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ACEE372BBEEAA900099400 /* MainTabView.swift */; };
@@ -58,9 +60,12 @@
 		64351D2F2BBD5E060072FAEB /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		64351D332BBD5FA90072FAEB /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		64351D3B2BBD6B660072FAEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6440FD572BC10E9400C256EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6440FD592BC10FDE00C256EC /* LMessengerDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LMessengerDebug.entitlements; sourceTree = "<group>"; };
+		6440FD5B2BC1137000C256EC /* randomNonceString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randomNonceString.swift; sourceTree = "<group>"; };
+		6440FD5D2BC1138C00C256EC /* sha256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sha256.swift; sourceTree = "<group>"; };
 		647D4F2C2BBFBBAE0004B691 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		647D4F2E2BBFBBF20004B691 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
-		64ACEE2F2BBD6D3100099400 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		64ACEE312BBEE76700099400 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		64ACEE352BBEEA8F00099400 /* LoginIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		64ACEE372BBEEAA900099400 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -152,6 +157,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6440FD5A2BC1134C00C256EC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				6440FD5B2BC1137000C256EC /* randomNonceString.swift */,
+				6440FD5D2BC1138C00C256EC /* sha256.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		647D4F2A2BBFBB990004B691 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,10 +216,11 @@
 		723ABD852AFFF1B800C260F1 /* LMessenger */ = {
 			isa = PBXGroup;
 			children = (
+				6440FD592BC10FDE00C256EC /* LMessengerDebug.entitlements */,
 				647D4F2A2BBFBB990004B691 /* Model */,
-				64ACEE2F2BBD6D3100099400 /* GoogleService-Info.plist */,
 				723ABD862AFFF1B800C260F1 /* LMessengerApp.swift */,
 				64351D3B2BBD6B660072FAEB /* AppDelegate.swift */,
+				6440FD572BC10E9400C256EC /* GoogleService-Info.plist */,
 				64351D2A2BBD5B7D0072FAEB /* Info.plist */,
 				64351D312BBD5F500072FAEB /* View */,
 				64351D2E2BBD5DC70072FAEB /* Service */,
@@ -213,6 +228,7 @@
 				72E4BEFA2B00B871007A1060 /* Extension */,
 				723ABDB02AFFF1D800C260F1 /* Resource */,
 				723ABD8C2AFFF1B900C260F1 /* Preview Content */,
+				6440FD5A2BC1134C00C256EC /* Util */,
 			);
 			path = LMessenger;
 			sourceTree = "<group>";
@@ -375,7 +391,7 @@
 			files = (
 				723ABDB22AFFF1F000C260F1 /* Colors.xcassets in Resources */,
 				64351D292BBD5B0E0072FAEB /* LaunchScreen.storyboard in Resources */,
-				64ACEE302BBD6D3100099400 /* GoogleService-Info.plist in Resources */,
+				6440FD582BC10E9400C256EC /* GoogleService-Info.plist in Resources */,
 				723ABD8E2AFFF1B900C260F1 /* Preview Assets.xcassets in Resources */,
 				723ABD8B2AFFF1B900C260F1 /* Assets.xcassets in Resources */,
 			);
@@ -402,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6440FD5E2BC1138C00C256EC /* sha256.swift in Sources */,
 				647D4F2D2BBFBBAE0004B691 /* User.swift in Sources */,
 				64ACEE362BBEEA8F00099400 /* LoginIntroView.swift in Sources */,
 				64351D342BBD5FA90072FAEB /* AuthenticationViewModel.swift in Sources */,
@@ -412,6 +429,7 @@
 				64ACEE3C2BBEED3A00099400 /* LoginView.swift in Sources */,
 				72E4BEFC2B00B871007A1060 /* Color+Extension.swift in Sources */,
 				723ABD872AFFF1B800C260F1 /* LMessengerApp.swift in Sources */,
+				6440FD5C2BC1137000C256EC /* randomNonceString.swift in Sources */,
 				64ACEE3A2BBEED1100099400 /* LoginBtnStyle.swift in Sources */,
 				64ACEE322BBEE76700099400 /* AuthenticationService.swift in Sources */,
 				647D4F2F2BBFBBF20004B691 /* ServiceError.swift in Sources */,
@@ -571,6 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LMessenger/LMessengerDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LMessenger/Preview Content\"";
@@ -588,7 +607,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fastcampus.LMessenger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Woogie.LMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -618,7 +637,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fastcampus.LMessenger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Woogie.LMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
