@@ -6,9 +6,9 @@
 
 import SwiftUI
 
+// 네이밍 보통 카멜케이스 사용해서 맞춰서 바꿔줌
 extension Color {
-    // 네이밍 보통 카멜케이스 사용해서 맞춰서 바꿔줌 
-    static let bgWh: Color = .init("bg-wh")
+    static let bgWh: Color = Color("bg-wh")
     static let bk2Fix: Color = .init("bk-2-fix")
     static let bkText: Color = .init("bk-text")
     static let blackFix: Color = .init("black-fix")
@@ -27,4 +27,3 @@ extension Color {
     static let skyBg: Color = .init("sky_bg")
     static let whiteFix: Color = .init("white-fix")
 }
-
