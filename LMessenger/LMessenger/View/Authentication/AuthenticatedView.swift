@@ -19,10 +19,12 @@ struct AuthenticatedView: View {
             case .authenticated:
                 // TODO: mainTabView
                 MainTabView()
+                    .environmentObject(authViewModel)
             }
         }
         .onAppear { // 상태가 업데이트 되었다고 하면 해당 상태에 따라 분기 처리 가능함
             authViewModel.send(action: .checkAuthenticationState)
+            //authViewModel.send(action: .logout)
         }
     }
 }

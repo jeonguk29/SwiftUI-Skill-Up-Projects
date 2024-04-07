@@ -15,6 +15,18 @@ struct User {
     var description: String?
 }
 
+// User 객체를 오브젝트 객체로 바꾸는 기능을 확장으로 모델에 구현
+extension User {
+    func toObject() -> UserObject {
+        .init(
+            id: id,
+            name: name,
+            phoneNumber: phoneNumber,
+            profileURL: profileURL,
+            description: description
+        )
+    }
+}
 
 // 친구목록 더미
 extension User {

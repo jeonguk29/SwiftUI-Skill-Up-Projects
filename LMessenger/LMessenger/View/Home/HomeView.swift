@@ -58,6 +58,9 @@ struct HomeView: View {
                     Image("settings")
                 }
             }
+            .onAppear {
+                homeViewModel.send(action: .getUser)
+            }
         }
     }
 
@@ -129,6 +132,7 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    HomeView(homeViewModel: .init())
-}
+//#Preview {
+//    HomeView(homeViewModel: .init(container: StubService()))
+//}
+

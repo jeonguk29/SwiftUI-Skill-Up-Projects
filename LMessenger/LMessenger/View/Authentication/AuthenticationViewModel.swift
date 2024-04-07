@@ -60,6 +60,10 @@ class AuthenticationViewModel: ObservableObject {
             isLoading = true // ProgressView 보여주기
             
             container.services.authService.signInWithGoogle()
+            // TODO : DB 추가하는 작업
+                .flatMap { user in
+                    self.container.services.userService.addUser(user)
+                }
                 .sink { [weak self] completion in
                     // TODO: 실패시 작업
                     if case .failure = completion {
@@ -82,6 +86,10 @@ class AuthenticationViewModel: ObservableObject {
                 guard let nonce = currentNonce else { return }
                 
                 container.services.authService.handleSignInWithAppleCompletion(authorization, nonce: nonce)
+                // TODO : DB 추가하는 작업
+                    .flatMap { user in
+                        self.container.services.userService.addUser(user)
+                    }
                     .sink { [weak self] completion in
                         if case .failure = completion {
                             self?.isLoading = false
@@ -102,7 +110,7 @@ class AuthenticationViewModel: ObservableObject {
                     
                 } receiveValue: { [weak self] _ in
                     self?.authenticationState = .unauthenticated // 결과 오면 비인증으로 만들고
-                    self?.userId = nil // 초기화 
+                    self?.userId = nil // 초기화
                 }
             
         }

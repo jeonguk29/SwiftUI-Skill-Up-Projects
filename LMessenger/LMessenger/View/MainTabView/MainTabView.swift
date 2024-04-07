@@ -8,7 +8,8 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab: MainTabType = .home
-    
+    @EnvironmentObject private var container: DIContainer
+    @EnvironmentObject private var authViewModel: AuthenticationViewModel
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -16,7 +17,7 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(homeViewModel: .init())
+                        HomeView(homeViewModel: .init(container: container, userId: authViewModel.userId ?? ""))
                     case .chat:
                         ChatListView()
                     case .phone:
