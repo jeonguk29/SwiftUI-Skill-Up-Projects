@@ -72,6 +72,7 @@ class UserDBRepository: UserDBRepositoryType {
         .eraseToAnyPublisher()
     }
 
+    // 친구 목록 가져오기 유저 Key를 가지고 친구목록 다 가지고와서 배열로 만들기
     func loadUsers() -> AnyPublisher<[UserObject], DBError> {
         Future<Any?, DBError> { [weak self] promise in
             self?.db.child(DBKey.users).getData { error, snapshot in
@@ -83,10 +84,11 @@ class UserDBRepository: UserDBRepositoryType {
                     promise(.success(snapshot?.value))
                 }
             }
-        }
+        } // 데이터를 성공적으로 가져왔다면 아래 로직 실행
         .flatMap { value in
             if let dic = value as? [String: [String: Any]] {
                 return Just(dic)
+                // 오브젝트를 데이터화
                     .tryMap { try JSONSerialization.data(withJSONObject: $0) }
                     .decode(type: [String: UserObject].self, decoder: JSONDecoder())
                     .map { $0.values.map { $0 as UserObject } }
@@ -94,7 +96,7 @@ class UserDBRepository: UserDBRepositoryType {
                     .eraseToAnyPublisher()
             } else if value == nil {
                 return Just([])
-                    .setFailureType(to: DBError.self)
+                    .setFailureType(to: DBError.self) // 에러타입 명시적 지정
                     .eraseToAnyPublisher()
             } else {
                 return Fail(error: .invalidatedType).eraseToAnyPublisher()

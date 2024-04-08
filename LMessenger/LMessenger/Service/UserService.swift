@@ -42,11 +42,12 @@ class UserService: UserServiceType {
             .eraseToAnyPublisher()
     }
 
+    // 친구 목록 가져오가ㅣ
     func loadUsers(myId: String) -> AnyPublisher<[User], ServiceError> {
         dbRepository.loadUsers()
             .map { $0
                 .map { $0.toModel() }
-                .filter { $0.id != myId }
+                .filter { $0.id != myId } // 필터를 사용해서 자기 자신은 제외 시키기 
             }
             .mapError { .error($0) }
             .eraseToAnyPublisher()
@@ -66,7 +67,7 @@ class StubUserService: UserServiceType {
     }
 
     func loadUsers(myId: String) -> AnyPublisher<[User], ServiceError> {
-        Just([.stub1, .stub2])
+        Just([.stub1, .stub2]) // 프리뷰에서 확인하기 위한 더미 데이터
             .setFailureType(to: ServiceError.self)
             .eraseToAnyPublisher()
     }
