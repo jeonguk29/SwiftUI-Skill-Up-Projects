@@ -157,7 +157,8 @@ struct HomeView: View {
             .padding(.bottom, 30)
 
             Button {
-                // TODO:
+                // TODO: 전화번호부 연동
+                homeViewModel.send(action: .requestContacts)
             } label: {
                 Text("친구추가")
                     .font(.system(size: 14))

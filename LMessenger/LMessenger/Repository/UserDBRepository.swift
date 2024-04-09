@@ -13,13 +13,14 @@ protocol UserDBRepositoryType {
     func addUser(_ object: UserObject) -> AnyPublisher<Void, DBError>
     func getUser(userId: String) -> AnyPublisher<UserObject, DBError>
     func loadUsers() -> AnyPublisher<[UserObject], DBError>
+    func addUserAfterContact(users: [UserObject]) -> AnyPublisher<Void, DBError>
 }
 
 class UserDBRepository: UserDBRepositoryType {
     
     // root를 말함
     var db: DatabaseReference = Database.database().reference()
- 
+    
     func addUser(_ object: UserObject) -> AnyPublisher<Void, DBError> {
         // object > data > dictionary
         Just(object) // 컴바인 연산자를 이용하여 체이닝해 바꿀 것임
@@ -38,10 +39,10 @@ class UserDBRepository: UserDBRepositoryType {
                     }
                 }
             }
-            .mapError { DBError.error($0) } // DBError로 변환해서 퍼블리셔로 보낼것임 
+            .mapError { DBError.error($0) } // DBError로 변환해서 퍼블리셔로 보낼것임
             .eraseToAnyPublisher()
     }
-
+    
     
     // 유저 정보 DB에서 가져오기
     func getUser(userId: String) -> AnyPublisher<UserObject, DBError> {
@@ -71,7 +72,7 @@ class UserDBRepository: UserDBRepositoryType {
         }
         .eraseToAnyPublisher()
     }
-
+    
     // 친구 목록 가져오기 유저 Key를 가지고 친구목록 다 가지고와서 배열로 만들기
     func loadUsers() -> AnyPublisher<[UserObject], DBError> {
         Future<Any?, DBError> { [weak self] promise in
@@ -103,5 +104,47 @@ class UserDBRepository: UserDBRepositoryType {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    func addUserAfterContact(users: [UserObject]) -> AnyPublisher<Void, DBError> {
+        /*
+         Users/
+         user_id: [String: Any]
+         user_id: [String: Any]
+         user_id: [String: Any]
+         이런식으로 저장해야함
+         */
+        
+        //Zip을 사용할건데 스트림으로 해당 정보를 딕셔너리화 할것임
+        // 첫 번째는 유저 정보를 변환하지 않는 퍼블리셔 두번째는 변환하는 퍼블리셔
+        Publishers.Zip(users.publisher, users.publisher)
+            .compactMap { origin, converted in
+                if let converted = try? JSONEncoder().encode(converted) {
+                    return (origin, converted)
+                } else {
+                    return nil
+                }
+            }
+            .compactMap { origin, converted in
+                if let converted = try? JSONSerialization.jsonObject(with: converted, options: .fragmentsAllowed) {
+                    return (origin, converted)
+                } else {
+                    return nil
+                }
+            }
+            .flatMap { origin, converted in
+                Future<Void, Error> { [weak self] promise in
+                    self?.db.child(DBKey.users).child(origin.id).setValue(converted) { error, _ in
+                        if let error {
+                            promise(.failure(error))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+                }
+            }
+            .last()
+            .mapError { .error($0) }
+            .eraseToAnyPublisher()
     }
 }

@@ -11,6 +11,7 @@ import Combine
 protocol UserServiceType {
     // 여기는서비스라 DTO가 아닌 User 모델을 받음 
     func addUser(_ user: User) -> AnyPublisher<User, ServiceError>
+    func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError>
     func getUser(userId: String) -> AnyPublisher<User, ServiceError>
     func loadUsers(myId: String) -> AnyPublisher<[User], ServiceError>
 }
@@ -25,7 +26,14 @@ class UserService: UserServiceType {
     ) {
         self.dbRepository = dbRepository
     }
-
+    
+    // 선언형 프로그래밍을 보여주는 예시
+    func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError> {
+        dbRepository.addUserAfterContact(users: users.map { $0.toObject() }) // DTO 변환시켜 던지기
+            .mapError { .error($0) }
+            .eraseToAnyPublisher()
+    }
+    
     // 사용자 파이어베이스 등록하기
     func addUser(_ user: User) -> AnyPublisher<User, ServiceError> {
         dbRepository.addUser(user.toObject()) // Model을 => DTO로
@@ -55,6 +63,10 @@ class UserService: UserServiceType {
 }
 
 class StubUserService: UserServiceType {
+    func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError> {
+        Empty().eraseToAnyPublisher()
+    }
+    
 
     func addUser(_ user: User) -> AnyPublisher<User, ServiceError> {
         Empty().eraseToAnyPublisher()

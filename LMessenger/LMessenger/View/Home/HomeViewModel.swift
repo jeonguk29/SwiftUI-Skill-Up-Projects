@@ -11,6 +11,7 @@ class HomeViewModel: ObservableObject {
     
     enum Action {
         case load
+        case requestContacts
         case presentMyProfile
         case presentOtherProfile(String)
     }
@@ -43,6 +44,24 @@ class HomeViewModel: ObservableObject {
                 })
                 .flatMap { user in
                     self.container.services.userService.loadUsers(myId: user.id)
+                }
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] users in
+                    self?.users = users
+                    self?.phase = .success
+                }
+                .store(in: &subscriptions)
+        case .requestContacts:
+            container.services.contactService.fetchContacts()
+            // 유저 정보 불러왔으면 이 정보를 DB에 넣어야함
+                .flatMap { users in
+                    self.container.services.userService.addUserAfterContact(users: users)
+                }
+                .flatMap { _ in
+                    self.container.services.userService.loadUsers(myId: self.userId)
                 }
                 .sink { [weak self] completion in
                     if case .failure = completion {
