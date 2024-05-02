@@ -12,8 +12,10 @@ protocol UserServiceType {
     // 여기는서비스라 DTO가 아닌 User 모델을 받음 
     func addUser(_ user: User) -> AnyPublisher<User, ServiceError>
     func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError>
+    func getUser(userId: String) async throws -> User
     func getUser(userId: String) -> AnyPublisher<User, ServiceError>
     func loadUsers(myId: String) -> AnyPublisher<[User], ServiceError>
+    func updateDescription(userId: String, description: String) async throws
 }
 
 class UserService: UserServiceType {
@@ -50,6 +52,12 @@ class UserService: UserServiceType {
             .eraseToAnyPublisher()
     }
 
+    func getUser(userId: String) async throws -> User {
+        let userObject = try await dbRepository.getUser(userId: userId)
+        return userObject.toModel()
+    }
+    
+    
     // 친구 목록 가져오가ㅣ
     func loadUsers(myId: String) -> AnyPublisher<[User], ServiceError> {
         dbRepository.loadUsers()
@@ -60,6 +68,11 @@ class UserService: UserServiceType {
             .mapError { .error($0) }
             .eraseToAnyPublisher()
     }
+    
+    func updateDescription(userId: String, description: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "description", value: description)
+    }
+   
 }
 
 class StubUserService: UserServiceType {
@@ -77,10 +90,14 @@ class StubUserService: UserServiceType {
             .setFailureType(to: ServiceError.self)
             .eraseToAnyPublisher()
     }
+    func getUser(userId: String) async throws -> User {
+        return .stub1
+    }
 
     func loadUsers(myId: String) -> AnyPublisher<[User], ServiceError> {
         Just([.stub1, .stub2]) // 프리뷰에서 확인하기 위한 더미 데이터
             .setFailureType(to: ServiceError.self)
             .eraseToAnyPublisher()
     }
+    func updateDescription(userId: String, description: String) async throws { }
 }
