@@ -76,6 +76,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         case .cacheTest:
             SampleCache.shared.add(data: DummyGenerator.make())
         case .weak:
+            // weak은 없으면 nil로 나옴
+            // 요즘은 디바이스 성능을 생각했을때 이 Unowned를 사용하여 오버헤드를 신경 쓰는 것 보단 weak을 사용하여 앱 안정성을 올려 사용자들에게 더 좋은 경험을 주는 것이 좋음
             let main = WeakMain()
             let sub = WeakSub()
             main.sub = sub
@@ -88,7 +90,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let main = UnownedMain(sub: sub)
             Task {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
-                print(String(describing: main.sub.value))
+                print(String(describing: main.sub.value)) // 크래시
             }
         case .unownedOptional:
             let main = UnownedOptionalMain()
@@ -96,7 +98,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             main.sub = sub
             Task {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
-                print(String(describing: main.sub?.value))
+                print(String(describing: main.sub?.value)) // 크래시
             }
         }
     }

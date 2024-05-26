@@ -10,6 +10,7 @@ import Foundation
 class TaskSample {
     
     func doSomething() {
+        // 캡처 리스트 적용하지 않아서 끝까지 불리게 되는 것임 이런 차이점이 있어서 무분별하게 캡처리스트 사용하는 것이 아니라 정말 필요한 경우에 잘 사용할 수 있도록 고민해봐야함 
 //        Task {
 //            do {
 //                try await self.getSomething()
