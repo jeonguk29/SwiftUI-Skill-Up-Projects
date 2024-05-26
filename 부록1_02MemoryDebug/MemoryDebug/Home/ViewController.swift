@@ -54,9 +54,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         case .crash:
             _ = [Int]()[1]
         case .memoryType1:
-            let aModule = AModule()
-            _ = BModule(aModule: aModule)
+            // 1-1. A,B 서로 참조하는 경우
             
+//            let aModule = AModule()
+//            _ = BModule(aModule: aModule)
+            
+            // 1-2. A=>B=>C=>A 서로 참조하는 경우
+            // 버튼 누를때마다 메모리 증가함 
             let circularA = CircularA()
             let circularB = CircularB()
             let circularC = CircularC()

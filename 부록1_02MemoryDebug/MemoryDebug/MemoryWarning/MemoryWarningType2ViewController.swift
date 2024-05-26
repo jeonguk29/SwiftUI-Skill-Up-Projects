@@ -22,7 +22,8 @@ class MemoryWarningType2ViewController: UIViewController, ChildViewDataSource {
         let childView = ChildView()
         childView.frame.size = .init(width: 200, height: 200)
         childView.backgroundColor = .blue
-        childView.dataSource = self
+        childView.dataSource = self // 💁 이렇게 하면 childView는 self를 알고 있고 self는 View를 알고 있음
+                                    // view는 또 childView를 알고 있어서 순환 참조임
         childView.center = self.view.center
         self.view.addSubview(childView)
     }

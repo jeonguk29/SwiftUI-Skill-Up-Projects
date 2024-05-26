@@ -8,6 +8,9 @@
 import UIKit
 import Combine
 
+
+// MARK: - 컴바인을 사용한 순환참조
+
 class MemoryWarningType3ViewController: UIViewController {
     
     private let viewModel = ViewModel()
@@ -27,8 +30,8 @@ class MemoryWarningType3ViewController: UIViewController {
     
     private func bind() {
         self.viewModel.dataChangePublisher.sink {
-            self.logSomething()
-        }.store(in: &self.cancellables)
+            self.logSomething() // 💁 클로저 내부에서 self가 캡처됨
+        }.store(in: &self.cancellables) // 캡처된 동작이 다시 &self.cancellables로 들어가 있음
         
         self.voidClosure = {
             self.logSomething()
