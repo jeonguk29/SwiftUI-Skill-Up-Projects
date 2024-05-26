@@ -11,9 +11,10 @@ class MemoryWarningType2ViewController: UIViewController, ChildViewDataSource {
     
     private let dummy: Data = DummyGenerator.make()
     
-//    deinit {
-//        print("MemoryWarningType2ViewController deinit")
-//    }
+    deinit {
+        // 참조 발생시 해당 문자열 출력되지 않을 것임
+        print("MemoryWarningType2ViewController deinit")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,8 @@ class MemoryWarningType2ViewController: UIViewController, ChildViewDataSource {
 
     private class ChildView: UIView {
         
-        var dataSource: ChildViewDataSource?
-//        weak var dataSource: ChildViewDataSource?
+//        var dataSource: ChildViewDataSource?
+        weak var dataSource: ChildViewDataSource?
     }
 }
 

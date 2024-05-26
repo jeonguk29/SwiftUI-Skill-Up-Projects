@@ -17,9 +17,9 @@ class MemoryWarningType3ViewController: UIViewController {
     private var cancellables: Set<AnyCancellable> = []
     private var voidClosure: (() -> Void)?
     
-//    deinit {
-//        print("MemoryWarningType3ViewController deinit")
-//    }
+    deinit {
+        print("MemoryWarningType3ViewController deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,21 +29,21 @@ class MemoryWarningType3ViewController: UIViewController {
     }
     
     private func bind() {
-        self.viewModel.dataChangePublisher.sink {
-            self.logSomething() // 💁 클로저 내부에서 self가 캡처됨
-        }.store(in: &self.cancellables) // 캡처된 동작이 다시 &self.cancellables로 들어가 있음
-        
-        self.voidClosure = {
-            self.logSomething()
-        }
-        
-//        self.viewModel.dataChangePublisher.sink { [weak self] in
-//            self?.logSomething()
-//        }.store(in: &self.cancellables)
-//
-//        self.voidClosure = { [weak self] in
-//            self?.logSomething()
+//        self.viewModel.dataChangePublisher.sink {
+//            self.logSomething() // 💁 클로저 내부에서 self가 캡처됨
+//        }.store(in: &self.cancellables) // 캡처된 동작이 다시 &self.cancellables로 들어가 있음
+//        
+//        self.voidClosure = {
+//            self.logSomething()
 //        }
+        
+        self.viewModel.dataChangePublisher.sink { [weak self] in
+            self?.logSomething()
+        }.store(in: &self.cancellables)
+
+        self.voidClosure = { [weak self] in
+            self?.logSomething()
+        }
     }
     
     private func logSomething() {
